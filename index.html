@@ -1,14 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yifeng Yang · Academic Profile</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* 保留原样式，省略展示 */
+        :root {
+            color-scheme: light;
+            --bg-start: #c6d4ff;
+            --bg-mid: #f4c8ff;
+            --bg-end: #ffd7c2;
+            --glass-bg: rgba(255, 255, 255, 0.35);
+            --glass-border: rgba(255, 255, 255, 0.55);
+            --text-strong: #1a1d2b;
+            --text-medium: rgba(26, 29, 43, 0.7);
+            --accent: rgba(255, 255, 255, 0.8);
+            --shadow: 0 18px 45px rgba(84, 99, 179, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--text-medium);
+            background: linear-gradient(135deg, var(--bg-start), var(--bg-mid), var(--bg-end));
+            min-height: 100vh;
+            padding: 40px 16px 80px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: absolute;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        body::before {
+            top: -20vw;
+            left: -10vw;
+            background: rgba(255, 255, 255, 0.55);
+        }
+
+        body::after {
+            bottom: -10vw;
+            right: -15vw;
+            background: rgba(255, 182, 193, 0.45);
+        }
+
+        .frame {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glass {
+            background: var(--glass-bg);
+            border-radius: 32px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            padding: 40px;
+            margin-bottom: 28px;
+        }
+
+        header.glass {
+            padding: 48px;
+        }
+
+        @media (max-width: 768px) {
+            .glass {
+                padding: 28px;
+                border-radius: 24px;
+            }
+
+            header.glass {
+                padding: 36px 28px;
+            }
+        }
+
+        .hero {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .portrait {
+            width: 180px;
+            height: 180px;
+            border-radius: 40px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 40px rgba(74, 58, 255, 0.25);
+        }
+
+        .portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: clamp(2.1rem, 5vw, 3.2rem);
+            color: var(--text-strong);
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+
+        .hero-meta {
+            color: var(--text-medium);
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .hero-subtle {
+            color: rgba(26, 29, 43, 0.55);
+            font-size: 0.95rem;
+        }
+
+        .contact-actions {
+            margin-top: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px 12px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            color: var(--text-strong);
+            font-weight: 500;
+            text-decoration: none;
+            transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 12px 30px rgba(64, 48, 94, 0.2);
+        }
+
+        .chip:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 16px 34px rgba(64, 48, 94, 0.28);
+        }
+
+        .chip-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.45), 0 6px 15px rgba(55, 55, 75, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .chip-icon svg {
+            width: 18px;
+            height: 18px;
+            color: var(--text-strong);
+        }
+
+        .chip-icon--gmail {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(255, 224, 224, 0.9));
+            border-color: rgba(255, 198, 194, 0.9);
+        }
+
+        .chip-icon--github {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(210, 218, 255, 0.9));
+            border-color: rgba(185, 198, 255, 0.85);
+        }
+
+        .chip-icon--scholar {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(210, 233, 255, 0.95));
+            border-color: rgba(177, 213, 255, 0.85);
+        }
+
+        section h2 {
+            font-size: 1.6rem;
+            color: var(--text-strong);
+            margin-bottom: 24px;
+            letter-spacing: -0.3px;
+        }
+
+        .about {
+            font-size: 1.05rem;
+        }
+
+        .about p + p {
+            margin-top: 14px;
+        }
+
+        .edu-card,
+        .pub-card {
+            border-radius: 26px;
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            padding: 26px 28px;
+            background: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 10px 25px rgba(93, 75, 126, 0.2);
+            margin-bottom: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .edu-card:hover,
+        .pub-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .edu-head {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .edu-logo img {
+            max-width: 90px;
+            opacity: 0.85;
+        }
+
+        .edu-title {
+            font-size: 1.25rem;
+            color: var(--text-strong);
+            margin-bottom: 6px;
+        }
+
+        .edu-detail {
+            color: rgba(26, 29, 43, 0.65);
+            font-size: 0.95rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tag-pill {
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text-strong);
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.2px;
+        }
+
+        .pub-title {
+            font-size: 1.15rem;
+            color: var(--text-strong);
+            margin-bottom: 10px;
+        }
+
+        .pub-authors {
+            margin-bottom: 6px;
+        }
+
+        .pub-venue {
+            color: rgba(26, 29, 43, 0.55);
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+
+        .link-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .link-row a {
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(26, 29, 43, 0.15);
+            text-decoration: none;
+            color: var(--text-strong);
+            background: rgba(255, 255, 255, 0.9);
+            transition: background 0.2s ease;
+        }
+
+        .link-row a:hover {
+            background: #ffffff;
+        }
+
+        footer {
+            text-align: center;
+            color: rgba(26, 29, 43, 0.6);
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -16,23 +327,18 @@
         <header class="glass">
             <div class="hero">
                 <div class="portrait">
-                    <img src="./9501343dd43a64379e9d5773fdcb4357.JPG" alt="Yifeng Yang" />
+                    <img src="./9501343dd43a64379e9d5773fdcb4357.JPG" alt="Yifeng Yang">
                 </div>
                 <div>
                     <h1>Yifeng Yang</h1>
                     <div class="hero-meta">Ph.D. Student · Computer Science</div>
                     <div class="hero-subtle">Shanghai Jiao Tong University</div>
                     <div class="contact-actions">
-                        <a
-                            class="chip"
-                            href="mailto:maxwellquadyang@gmail.com?subject=Contact%20via%20Website"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
+                        <a class="chip" href="mailto:maxwellquadyang@gmail.com" target="_blank" rel="noopener noreferrer">
                             <span class="chip-icon chip-icon--gmail">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M2 6.5v11c0 .83.67 1.5 1.5 1.5h17c.83 0 1.5-.67 1.5-1.5v-11c0-.83-.67-1.5-1.5-1.5h-17C2.67 5 2 5.67 2 6.5z" fill="#F2F6FF"/>
-                                    <path d="M3 7.5 12 13l9-5.5" fill="none" stroke="#EA4335" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M3 7.5 12 13l9-5.5" fill="none" stroke="#EA4335" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M3 17.5V7.5l9 5.7 9-5.7v10" fill="none" stroke="#4285F4" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </span>
@@ -76,7 +382,7 @@
                         <div class="edu-detail">Supervisor: Prof. Nanyang Ye</div>
                     </div>
                     <div class="edu-logo">
-                        <img src="./SJTU.png" alt="Shanghai Jiao Tong University" />
+                        <img src="./SJTU.png" alt="Shanghai Jiao Tong University">
                     </div>
                 </div>
             </article>
@@ -88,7 +394,7 @@
                         <div class="edu-detail">Supervisor: Prof. Changqing Zhang</div>
                     </div>
                     <div class="edu-logo">
-                        <img src="./tju.webp" alt="Tianjin University" />
+                        <img src="./tju.webp" alt="Tianjin University">
                     </div>
                 </div>
             </article>
@@ -105,9 +411,7 @@
 
         <section class="glass">
             <h2>Publications</h2>
-            <p style="margin-bottom:18px; color: rgba(26, 29, 43, 0.55); font-style: italic;">
-                * denotes equal contribution; † corresponding author
-            </p>
+            <p style="margin-bottom:18px; color: rgba(26, 29, 43, 0.55); font-style: italic;">* denotes equal contribution; † corresponding author</p>
 
             <article class="pub-card">
                 <h3 class="pub-title">OODD: Test-time Out-of-Distribution Detection with Dynamic Dictionary</h3>
@@ -121,10 +425,7 @@
 
             <article class="pub-card">
                 <h3 class="pub-title">ConcealGS: Concealing Invisible Copyright Information in 3D Gaussian Splatting</h3>
-                <p class="pub-authors">
-                    <strong>Yifeng Yang</strong>*, Hengyu Liu*, Chenxin Li, Yining Sun, Wuyang Li, Yifan Liu, Yiyang Lin,
-                    Yixuan Yuan, Nanyang Ye†
-                </p>
+                <p class="pub-authors"><strong>Yifeng Yang</strong>*, Hengyu Liu*, Chenxin Li, Yining Sun, Wuyang Li, Yifan Liu, Yiyang Lin, Yixuan Yuan, Nanyang Ye†</p>
                 <p class="pub-venue">ICASSP 2025</p>
                 <div class="link-row">
                     <a href="https://arxiv.org/pdf/2501.03605" target="_blank">Paper</a>
@@ -144,9 +445,7 @@
 
             <article class="pub-card">
                 <h3 class="pub-title">Selective Learning: Robust Calibration with Dynamic Regularization</h3>
-                <p class="pub-authors">
-                    Zongbo Han, <strong>Yifeng Yang</strong>, Changqing Zhang, Linjun Zhang, Joey Tianyi Zhou, Qinghua Hu†
-                </p>
+                <p class="pub-authors">Zongbo Han, <strong>Yifeng Yang</strong>, Changqing Zhang, Linjun Zhang, Joey Tianyi Zhou, Qinghua Hu†</p>
                 <p class="pub-venue">arXiv:2402.08384</p>
                 <div class="link-row">
                     <a href="https://arxiv.org/pdf/2402.08384" target="_blank">Paper</a>
@@ -160,11 +459,7 @@
             <p class="hero-meta" style="margin-bottom:8px;">Conference Reviewer</p>
             <p>ICASSP, IJCNN</p>
             <div style="margin-top:26px; text-align:center;">
-                <script
-                    type="text/javascript"
-                    id="clustrmaps"
-                    src="//clustrmaps.com/map_v2.js?d=N2HXAc7QajtJMUyrd5YaaKd33xnKstDoyAad54CBgKw&cl=ffffff&w=a"
-                ></script>
+                <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=N2HXAc7QajtJMUyrd5YaaKd33xnKstDoyAad54CBgKw&cl=ffffff&w=a"></script>
             </div>
         </section>
 
