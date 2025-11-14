@@ -3,8 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yifeng Yang - Academic Profile</title>
+    <title>Yifeng Yang · Academic Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            color-scheme: light;
+            --bg-start: #c6d4ff;
+            --bg-mid: #f4c8ff;
+            --bg-end: #ffd7c2;
+            --glass-bg: rgba(255, 255, 255, 0.35);
+            --glass-border: rgba(255, 255, 255, 0.55);
+            --text-strong: #1a1d2b;
+            --text-medium: rgba(26, 29, 43, 0.7);
+            --accent: rgba(255, 255, 255, 0.8);
+            --shadow: 0 18px 45px rgba(84, 99, 179, 0.25);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,568 +29,387 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
-            color: #e0e0e0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            background-attachment: fixed;
+            line-height: 1.7;
+            color: var(--text-medium);
+            background: linear-gradient(135deg, var(--bg-start), var(--bg-mid), var(--bg-end));
+            min-height: 100vh;
+            padding: 40px 16px 80px;
+            position: relative;
             overflow-x: hidden;
         }
 
-        /* 动态背景粒子效果 */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+        body::before,
+        body::after {
+            content: "";
+            position: absolute;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        body::before {
+            top: -20vw;
+            left: -10vw;
+            background: rgba(255, 255, 255, 0.55);
+        }
+
+        body::after {
+            bottom: -10vw;
+            right: -15vw;
+            background: rgba(255, 182, 193, 0.45);
+        }
+
+        .frame {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
             z-index: 1;
         }
 
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 20s infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); }
-            25% { transform: translateY(-100px) translateX(50px); }
-            50% { transform: translateY(-200px) translateX(-50px); }
-            75% { transform: translateY(-100px) translateX(100px); }
-        }
-
-        /* 主容器 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* 玻璃态卡片效果 */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        .glass {
+            background: var(--glass-bg);
+            border-radius: 32px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             padding: 40px;
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeInUp 0.8s forwards;
+            margin-bottom: 28px;
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        header.glass {
+            padding: 48px;
+        }
+
+        @media (max-width: 768px) {
+            .glass {
+                padding: 28px;
+                border-radius: 24px;
+            }
+
+            header.glass {
+                padding: 36px 28px;
             }
         }
 
-        /* 头部样式 */
-        header {
-            text-align: center;
-            margin-bottom: 60px;
-            animation-delay: 0.2s;
+        .hero {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
-        .profile-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 30px;
-        }
-
-        .profile-img {
-            border-radius: 50%;
+        .portrait {
             width: 180px;
             height: 180px;
-            object-fit: cover;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 40px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 40px rgba(74, 58, 255, 0.25);
         }
 
-        .profile-img:hover {
-            transform: scale(1.05) rotate(3deg);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+        .portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         h1 {
-            color: #ffffff;
-            font-size: 3em;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            font-size: clamp(2.1rem, 5vw, 3.2rem);
+            color: var(--text-strong);
             letter-spacing: -1px;
+            margin-bottom: 8px;
         }
 
-        .role {
-            font-size: 1.3em;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 10px;
-            font-weight: 300;
+        .hero-meta {
+            color: var(--text-medium);
+            font-weight: 500;
+            margin-bottom: 6px;
         }
 
-        .university-name {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1em;
-            margin-bottom: 20px;
+        .hero-subtle {
+            color: rgba(26, 29, 43, 0.55);
+            font-size: 0.95rem;
         }
 
-        /* 联系信息 */
-        .contact-info {
+        .contact-actions {
+            margin-top: 24px;
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
             flex-wrap: wrap;
+            gap: 12px;
         }
 
-        .contact-info a {
-            color: #ffffff;
-            text-decoration: none;
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            display: flex;
+        .chip {
+            display: inline-flex;
             align-items: center;
             gap: 8px;
+            padding: 12px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            color: var(--text-strong);
+            font-weight: 500;
+            text-decoration: none;
+            transition: transform 0.25s ease, background 0.25s ease;
+            background: rgba(255, 255, 255, 0.5);
         }
 
-        .contact-info a:hover {
-            background: rgba(255, 255, 255, 0.25);
+        .chip svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .chip:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.8);
         }
 
-        /* 章节标题 */
-        h2 {
-            color: #ffffff;
-            font-size: 2em;
-            margin-bottom: 30px;
-            position: relative;
-            padding-bottom: 15px;
-            font-weight: 600;
+        section h2 {
+            font-size: 1.6rem;
+            color: var(--text-strong);
+            margin-bottom: 24px;
+            letter-spacing: -0.3px;
         }
 
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, #fff, transparent);
-            border-radius: 2px;
+        .about {
+            font-size: 1.05rem;
         }
 
-        /* 关于我部分 */
-        #about p {
-            font-size: 1.1em;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.9);
+        .about p + p {
+            margin-top: 14px;
         }
 
-        /* 教育背景 */
-        .education {
-            margin-bottom: 30px;
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            border-left: 4px solid rgba(255, 255, 255, 0.4);
-            transition: all 0.3s ease;
+        .edu-card,
+        .pub-card {
+            border-radius: 26px;
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            padding: 26px 28px;
+            background: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 10px 25px rgba(93, 75, 126, 0.2);
+            margin-bottom: 18px;
+            transition: transform 0.3s ease;
         }
 
-        .education:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(10px);
+        .edu-card:hover,
+        .pub-card:hover {
+            transform: translateY(-4px);
         }
 
-        .education-header {
+        .edu-head {
             display: flex;
             justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 18px;
             align-items: center;
-            gap: 20px;
         }
 
-        .education-text h3 {
-            color: #ffffff;
-            font-size: 1.4em;
-            margin-bottom: 8px;
+        .edu-logo img {
+            max-width: 90px;
+            opacity: 0.85;
         }
 
-        .university, .date, .supervisor {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 5px;
+        .edu-title {
+            font-size: 1.25rem;
+            color: var(--text-strong);
+            margin-bottom: 6px;
         }
 
-        .logo img {
-            max-width: 100px;
-            height: auto;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
+        .edu-detail {
+            color: rgba(26, 29, 43, 0.65);
+            font-size: 0.95rem;
         }
 
-        .education:hover .logo img {
-            opacity: 1;
-        }
-
-        /* 研究兴趣标签 */
-        .research-interests {
+        .tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 12px;
         }
 
-        .interest-tag {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 0.95em;
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            cursor: default;
+        .tag-pill {
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text-strong);
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.2px;
         }
 
-        .interest-tag:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        /* 论文发表 */
-        .publication {
-            margin-bottom: 30px;
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            border-left: 4px solid rgba(255, 255, 255, 0.4);
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateX(-50px);
-        }
-
-        .publication.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .publication:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .publication .title {
-            color: #ffffff;
-            font-size: 1.2em;
+        .pub-title {
+            font-size: 1.15rem;
+            color: var(--text-strong);
             margin-bottom: 10px;
-            font-weight: 600;
         }
 
-        .publication .authors {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 8px;
-            line-height: 1.6;
+        .pub-authors {
+            margin-bottom: 6px;
         }
 
-        .publication .venue {
-            color: rgba(255, 255, 255, 0.6);
+        .pub-venue {
+            color: rgba(26, 29, 43, 0.55);
             font-style: italic;
             margin-bottom: 12px;
         }
 
-        .publication .links {
+        .link-row {
             display: flex;
-            gap: 15px;
             flex-wrap: wrap;
+            gap: 10px;
         }
 
-        .publication .links a {
-            color: #ffffff;
-            text-decoration: none;
+        .link-row a {
+            font-size: 0.9rem;
             padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            font-size: 0.9em;
+            border-radius: 999px;
+            border: 1px solid rgba(26, 29, 43, 0.15);
+            text-decoration: none;
+            color: var(--text-strong);
+            background: rgba(255, 255, 255, 0.9);
+            transition: background 0.2s ease;
         }
 
-        .publication .links a:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
+        .link-row a:hover {
+            background: #ffffff;
         }
 
-        /* 服务部分 */
-        #Services h3 {
-            color: #ffffff;
-            font-size: 1.3em;
-            margin-bottom: 15px;
-        }
-
-        #Services p {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.8;
-        }
-
-        /* 页脚 */
         footer {
             text-align: center;
-            margin-top: 50px;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9em;
-            padding: 20px;
+            color: rgba(26, 29, 43, 0.6);
+            margin-top: 20px;
+            font-size: 0.9rem;
         }
 
-        /* 滚动动画 */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-        .scroll-reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
             }
-
-            .glass-card {
-                padding: 25px;
-            }
-
-            .education-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        /* 注释说明 */
-        .note {
-            color: rgba(255, 255, 255, 0.7);
-            font-style: italic;
-            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <!-- 动态背景粒子 -->
-    <div class="particles" id="particles"></div>
-
-    <div class="container">
-        <header class="glass-card">
-            <div class="profile-container">
-                <img src="./9501343dd43a64379e9d5773fdcb4357.JPG" class="profile-img" alt="Yifeng Yang">
-            </div>
-            <h1>Yifeng Yang</h1>
-            <div class="role">Ph.D. Student in Computer Science</div>
-            <div class="university-name">Shanghai Jiao Tong University</div>
-            <div class="contact-info">
-                <a href="mailto:maxwellquadyang@gmail.com">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                    Email
-                </a>
-                <a href="https://github.com/zxk1212" target="_blank">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    GitHub
-                </a>
-                <a href="https://scholar.google.com/citations?user=QtFC_gIAAAAJ" target="_blank">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/>
-                    </svg>
-                    Google Scholar
-                </a>
+    <div class="frame">
+        <header class="glass">
+            <div class="hero">
+                <div class="portrait">
+                    <img src="./9501343dd43a64379e9d5773fdcb4357.JPG" alt="Yifeng Yang">
+                </div>
+                <div>
+                    <h1>Yifeng Yang</h1>
+                    <div class="hero-meta">Ph.D. Student · Computer Science</div>
+                    <div class="hero-subtle">Shanghai Jiao Tong University</div>
+                    <div class="contact-actions">
+                        <a class="chip" href="mailto:maxwellquadyang@gmail.com">
+                            <span>✉</span> Email
+                        </a>
+                        <a class="chip" href="https://github.com/zxk1212" target="_blank">GitHub</a>
+                        <a class="chip" href="https://scholar.google.com/citations?user=QtFC_gIAAAAJ" target="_blank">Google Scholar</a>
+                    </div>
+                </div>
             </div>
         </header>
 
-        <section id="about" class="glass-card scroll-reveal">
+        <section class="glass about">
             <h2>About Me</h2>
-            <p>
-                I am a Ph.D. student in Computer Science at Shanghai Jiao Tong University, under the supervision of Prof. Nanyang Ye. My research focuses on confidence calibration, latent diffusion model, vision language Model, etc. Prior to my doctoral studies, I received my bachelor's degree from Tianjin University, advised by Zongbo Han and Prof. Changqing Zhang.
-            </p>
+            <p>I am a Ph.D. student in Computer Science at Shanghai Jiao Tong University, advised by Prof. Nanyang Ye. My work explores confidence calibration, latent diffusion models, and vision-language systems.</p>
+            <p>Before joining SJTU, I completed my B.E. in Artificial Intelligence at Tianjin University, where I was mentored by Zongbo Han and Prof. Changqing Zhang.</p>
         </section>
 
-        <section id="education" class="glass-card scroll-reveal">
+        <section class="glass">
             <h2>Education</h2>
-            <div class="education">
-                <div class="education-header">
-                    <div class="education-text">
-                        <h3>Ph.D. in Computer Science</h3>
-                        <div class="university">Shanghai Jiao Tong University, China</div>
-                        <div class="date">2024 - 2029 (expected)</div>
-                        <div class="supervisor">Supervisor: Prof. Nanyang Ye</div>
+            <article class="edu-card">
+                <div class="edu-head">
+                    <div>
+                        <div class="edu-title">Ph.D. in Computer Science</div>
+                        <div class="edu-detail">Shanghai Jiao Tong University · 2024 – 2029 (expected)</div>
+                        <div class="edu-detail">Supervisor: Prof. Nanyang Ye</div>
                     </div>
-                    <div class="logo">
-                        <img src="./SJTU.png" alt="Shanghai Jiao Tong University" />
-                    </div>
-                </div>
-            </div>
-            <div class="education">
-                <div class="education-header">
-                    <div class="education-text">
-                        <h3>B.E. in Artificial Intelligence</h3>
-                        <div class="university">Tianjin University, China</div>
-                        <div class="date">2020 - 2024</div>
-                        <div class="supervisor">Supervisor: Prof. Changqing Zhang</div>
-                    </div>
-                    <div class="logo">
-                        <img src="./tju.webp" alt="Tianjin University" />
+                    <div class="edu-logo">
+                        <img src="./SJTU.png" alt="Shanghai Jiao Tong University">
                     </div>
                 </div>
-            </div>
+            </article>
+            <article class="edu-card">
+                <div class="edu-head">
+                    <div>
+                        <div class="edu-title">B.E. in Artificial Intelligence</div>
+                        <div class="edu-detail">Tianjin University · 2020 – 2024</div>
+                        <div class="edu-detail">Supervisor: Prof. Changqing Zhang</div>
+                    </div>
+                    <div class="edu-logo">
+                        <img src="./tju.webp" alt="Tianjin University">
+                    </div>
+                </div>
+            </article>
         </section>
 
-        <section id="research-interests" class="glass-card scroll-reveal">
+        <section class="glass">
             <h2>Research Interests</h2>
-            <div class="research-interests">
-                <div class="interest-tag">Confidence Calibration</div>
-                <div class="interest-tag">Latent Diffusion Model</div>
-                <div class="interest-tag">Vision Language Model</div>
+            <div class="tags">
+                <span class="tag-pill">Confidence Calibration</span>
+                <span class="tag-pill">Latent Diffusion Model</span>
+                <span class="tag-pill">Vision-Language Model</span>
             </div>
         </section>
 
-        <section id="publications" class="glass-card scroll-reveal">
+        <section class="glass">
             <h2>Publications</h2>
-            <div class="note">* denotes equal contribution; † denotes corresponding author</div>
-            
-            <div class="publication scroll-item">
-                <h3 class="title">OODD: Test-time Out-of-Distribution Detection with Dynamic Dictionary</h3>
-                <div class="authors"><strong>Yifeng Yang</strong>, Lin Zhu, Zewen Sun, Hengyu Liu, Qinying Gu, Nanyang Ye†</div>
-                <div class="venue">CVPR, 2025</div>
-                <div class="links">
+            <p style="margin-bottom:18px; color: rgba(26, 29, 43, 0.55); font-style: italic;">* denotes equal contribution; † corresponding author</p>
+
+            <article class="pub-card">
+                <h3 class="pub-title">OODD: Test-time Out-of-Distribution Detection with Dynamic Dictionary</h3>
+                <p class="pub-authors"><strong>Yifeng Yang</strong>, Lin Zhu, Zewen Sun, Hengyu Liu, Qinying Gu, Nanyang Ye†</p>
+                <p class="pub-venue">CVPR 2025</p>
+                <div class="link-row">
                     <a href="https://arxiv.org/pdf/2503.10468" target="_blank">Paper</a>
                     <a href="https://github.com/zxk1212/OODD" target="_blank">Code</a>
                 </div>
-            </div>
+            </article>
 
-            <div class="publication scroll-item">
-                <h3 class="title">ConcealGS: Concealing Invisible Copyright Information in 3D Gaussian Splatting</h3>
-                <div class="authors"><strong>Yifeng Yang</strong>*, Hengyu Liu*, Chenxin Li, Yining Sun, Wuyang Li, Yifan Liu, Yiyang Lin, Yixuan Yuan, Nanyang Ye†</div>
-                <div class="venue">ICASSP, 2025</div>
-                <div class="links">
+            <article class="pub-card">
+                <h3 class="pub-title">ConcealGS: Concealing Invisible Copyright Information in 3D Gaussian Splatting</h3>
+                <p class="pub-authors"><strong>Yifeng Yang</strong>*, Hengyu Liu*, Chenxin Li, Yining Sun, Wuyang Li, Yifan Liu, Yiyang Lin, Yixuan Yuan, Nanyang Ye†</p>
+                <p class="pub-venue">ICASSP 2025</p>
+                <div class="link-row">
                     <a href="https://arxiv.org/pdf/2501.03605" target="_blank">Paper</a>
                     <a href="https://github.com/zxk1212/ConcealGS" target="_blank">Code</a>
                 </div>
-            </div>
+            </article>
 
-            <div class="publication scroll-item">
-                <h3 class="title">CRoFT: Robust Fine-Tuning with Concurrent Optimization for OOD Generalization and Open-Set OOD Detection</h3>
-                <div class="authors">Lin Zhu, <strong>Yifeng Yang</strong>, Qinying Gu, Xinbing Wang, Chenghu Zhou, Nanyang Ye†</div>
-                <div class="venue">ICML, 2024</div>
-                <div class="links">
+            <article class="pub-card">
+                <h3 class="pub-title">CRoFT: Robust Fine-Tuning with Concurrent Optimization</h3>
+                <p class="pub-authors">Lin Zhu, <strong>Yifeng Yang</strong>, Qinying Gu, Xinbing Wang, Chenghu Zhou, Nanyang Ye†</p>
+                <p class="pub-venue">ICML 2024</p>
+                <div class="link-row">
                     <a href="https://arxiv.org/pdf/2405.16417" target="_blank">Paper</a>
                     <a href="https://github.com/LinLLLL/CRoFT" target="_blank">Code</a>
                 </div>
-            </div>
+            </article>
 
-            <div class="publication scroll-item">
-                <h3 class="title">Selective learning: Towards robust calibration with dynamic regularization</h3>
-                <div class="authors">Zongbo Han, <strong>Yifeng Yang</strong>, Changqing Zhang, Linjun Zhang, Joey Tianyi Zhou, Qinghua Hu†</div>
-                <div class="venue">arXiv preprint arXiv:2402.08384</div>
-                <div class="links">
+            <article class="pub-card">
+                <h3 class="pub-title">Selective Learning: Robust Calibration with Dynamic Regularization</h3>
+                <p class="pub-authors">Zongbo Han, <strong>Yifeng Yang</strong>, Changqing Zhang, Linjun Zhang, Joey Tianyi Zhou, Qinghua Hu†</p>
+                <p class="pub-venue">arXiv:2402.08384</p>
+                <div class="link-row">
                     <a href="https://arxiv.org/pdf/2402.08384" target="_blank">Paper</a>
                     <a href="#" target="_blank">Code</a>
                 </div>
-            </div>
+            </article>
         </section>
 
-        <section id="Services" class="glass-card scroll-reveal">
+        <section class="glass">
             <h2>Services</h2>
-            <h3>Conference Reviewer</h3>
-            <p>ICASSP, IJCNN.</p>
-            <div style="margin-top: 30px; display: flex; justify-content: center;">
+            <p class="hero-meta" style="margin-bottom:8px;">Conference Reviewer</p>
+            <p>ICASSP, IJCNN</p>
+            <div style="margin-top:26px; text-align:center;">
                 <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=N2HXAc7QajtJMUyrd5YaaKd33xnKstDoyAad54CBgKw&cl=ffffff&w=a"></script>
             </div>
         </section>
 
         <footer>
-            <p>© 2025 Yifeng Yang. Last updated: February 2025.</p>
+            © 2025 Yifeng Yang · Last updated February 2025
         </footer>
     </div>
-
-    <script>
-        // 创建动态粒子背景
-        function createParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                
-                const size = Math.random() * 60 + 20;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 20 + 15) + 's';
-                
-                container.appendChild(particle);
-            }
-        }
-
-        // 滚动动画
-        function scrollReveal() {
-            const reveals = document.querySelectorAll('.scroll-reveal');
-            
-            reveals.forEach((element, index) => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    setTimeout(() => {
-                        element.classList.add('active');
-                    }, index * 200);
-                }
-            });
-
-            // 论文条目的单独滚动动画
-            const publications = document.querySelectorAll('.scroll-item');
-            publications.forEach((pub, index) => {
-                const pubTop = pub.getBoundingClientRect().top;
-                const pubVisible = 100;
-                
-                if (pubTop < window.innerHeight - pubVisible) {
-                    setTimeout(() => {
-                        pub.classList.add('visible');
-                    }, index * 150);
-                }
-            });
-        }
-
-        // 初始化
-        window.addEventListener('load', () => {
-            createParticles();
-            scrollReveal();
-        });
-
-        window.addEventListener('scroll', scrollReveal);
-    </script>
 </body>
 </html>
